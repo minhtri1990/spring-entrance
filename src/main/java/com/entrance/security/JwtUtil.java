@@ -3,7 +3,6 @@ package com.entrance.security;
 import com.entrance.constant.Role;
 import com.entrance.entity.User;
 import io.jsonwebtoken.*;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -24,12 +23,14 @@ public class JwtUtil {
     @Value("${jwt.expirationDateIn7Day}")
     private int refreshTokenExpiration;
 
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
+//    @Bean
+//    public PasswordEncoder passwordEncoder() {
+//        return new BCryptPasswordEncoder();
+//    }
+
     public String generateToken(User dto, String role) {
         Map<String, Object> claims = new HashMap<>();
         claims.put(Role.ROLE, role);
